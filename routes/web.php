@@ -2,8 +2,9 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ProfileController;
-use App\Http\Controllers\Admin\PageController;
+use App\Http\Controllers\Admin\PageController as AdminPageController;
 use App\Http\Controllers\Admin\ApartmentController;
+use App\Http\Controllers\Guests\PageController as GuestsPageController;
 
 /*
 |--------------------------------------------------------------------------
@@ -16,13 +17,13 @@ use App\Http\Controllers\Admin\ApartmentController;
 |
 */
 
-Route::get('/', [PageController::class, 'home'])->name('guests.home');
+Route::get('/', [GuestsPageController::class, 'home'])->name('guests.home');
 
 Route::middleware(['auth', 'verified'])
     ->name('admin.')
     ->prefix('admin')
     ->group(function () {
-        Route::get('/', [PageController::class, 'dashboard'])->name('dashboard');
+        Route::get('/', [AdminPageController::class, 'dashboard'])->name('dashboard');
         Route::resource('apartment', ApartmentController::class);
     });
 
