@@ -317,7 +317,22 @@ class ApartmentsTableSeeder extends Seeder
         ];
 
         foreach ($apartmentsData as $apartmentData) {
-            Apartment::create($apartmentData);
+
+            $available = isset($apartmentData['available']) ? (bool)$apartmentData['available'] : false;
+            
+            $apartment = Apartment::create([
+                'name'          => $apartmentData['name'],
+                'rooms'         => $apartmentData['rooms'],
+                'beds'          => $apartmentData['beds'],
+                'bathrooms'     => $apartmentData['bathrooms'],
+                'square_meters' => $apartmentData['square_meters'],
+                'is_available'  => $available,
+                'is_sponsored'  => true,
+                'user_id'       => $apartmentData['user_id'],
+            ]);
+
+            $apartment->services()->sync($apartmentData['services']);
+            $apartment->sponsorships()->sync($apartmentData['sponsorships']);
         }
     }
 };

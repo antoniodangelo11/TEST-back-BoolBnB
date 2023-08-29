@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Models\Sponsorship;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
@@ -12,21 +13,27 @@ class SponsorshipsTableSeeder extends Seeder
      */
     public function run(): void
     {
-        $faker = Faker::create();
 
         $sponsorships = [
-            ['level' => 'Basic', 'price' => '50', 'duration' => '7 days'],
-            ['level' => 'Premium', 'price' => '100', 'duration' => '14 days'],
-            ['level' => 'Deluxe', 'price' => '150', 'duration' => '30 days'],
-            // Add more sponsorships here
+            [
+                'level'    => 'Basic', 
+                'price'    => '50', 
+                'duration' => '7 days'
+            ],
+            [
+                'level'    => 'Premium', 
+                'price'    => '100', 
+                'duration' => '14 days'
+            ],
+            [
+                'level' => 'Deluxe', 
+                'price' => '150', 
+                'duration' => '30 days'
+            ],
         ];
 
         foreach ($sponsorships as $sponsorship) {
-            DB::table('sponsorships')->insert([
-                'level' => $sponsorship['level'],
-                'price' => $sponsorship['price'],
-                'duration' => $sponsorship['duration'],
-            ]);
+            Sponsorship::create($sponsorship);
         }
     }
 };
