@@ -2,9 +2,10 @@
 
 namespace Database\Seeders;
 
+use App\Models\Service;
 use App\Models\Apartment;
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
+use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 
 class ApartmentsTableSeeder extends Seeder
 {
@@ -328,9 +329,16 @@ class ApartmentsTableSeeder extends Seeder
                 'is_sponsored'  => $apartmentData['is_sponsored'],
                 'user_id'       => $apartmentData['user_id'],
             ]);
+        }
+
+        foreach (Apartment::all() as $apartment) {
+            $apartment->services()->attach(
+                Service::inRandomOrder()->take(rand(1, 3))->pluck('id')->toArray()
+            );
 
             $apartment->services()->sync($apartmentData['services']);
-            $apartment->sponsorships()->sync($apartmentData['sponsorships']);
         }
+
+        $apartment->sponsorships()->sync($apartmentData['sponsorships']);
     }
 };
