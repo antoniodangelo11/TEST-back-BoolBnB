@@ -15,37 +15,12 @@ class UsersTableSeeder extends Seeder
     {
         $users = [
             [
-                "name"        => "Antonio",
-                "lastname"    => "D'Angelo",
-                "email"       => "antonio.dangelo1190@gmail.com",
-                'birth_date'  => Carbon::createFromFormat('d/m/Y', '11/09/1990')->format('Y-m-d'),
-                "password"    => Hash::make('antonio12345'),
-                "image"       => "",
+                'username'    => 'Admin',
+                'lastname'    => 'Admin',
+                'email'       => 'Admin@gmail.com',
+                'birth_date'  => Carbon::createFromFormat('d/m/Y', '01/01/2023')->format('Y-m-d'),
+                'password'    => Hash::make('admin12345'),
             ],
-            // [
-            //     "name"        => "Stefano",
-            //     "lastname"    => "Casamassima",
-            //     "email"       => "casamassimaluca723@gmail.com",
-            //     'birth_date'  => Carbon::createFromFormat('d/m/Y', '10/11/1994')->format('Y-m-d'),
-            //     "password"    => Hash::make('luca2001'),
-            //     "image"       => "Luca.png",
-            // ],
-            // [
-            //     "name"        => "Nicola",
-            //     "lastname"    => "Soggiu",
-            //     "email"       => "nicola.soggiu@gmail.com",
-            //     'birth_date'  => Carbon::createFromFormat('d/m/Y', '10/11/1994')->format('Y-m-d'),
-            //     "password"    => Hash::make('nicola96'),
-            //     "image"       => "Nicola.png",
-            // ],
-            // [
-            //     "name"        => "Lamberto",
-            //     "lastname"    => "Neri",
-            //     "email"       => "lamberto9107@hotmail.it",
-            //     'birth_date'  => Carbon::createFromFormat('d/m/Y', '10/11/1994')->format('Y-m-d'),
-            //     "password"    => Hash::make('Tato123'),
-            //     "image"       => "Lamberto.png",
-            // ],
         ];
 
         foreach ($users as $user){
