@@ -44,7 +44,7 @@ class ApartmentController extends Controller
 
     public function index()
     {
-        $apartments = Apartment::with([]);
+        $apartments = Apartment::with(['user', 'address', 'services', 'images', 'views']);
         return view('admin.apartments.index', compact('apartments'));
     }
 
