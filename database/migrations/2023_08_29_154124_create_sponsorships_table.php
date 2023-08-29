@@ -11,10 +11,11 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('services', function (Blueprint $table) {
+        Schema::create('sponsorships', function (Blueprint $table) {
             $table->bigIncrements('id')->unique();
-            $table->string('name', 70)->nullable(false);
-            $table->string('icon', 100)->nullable();
+            $table->string('level', 100)->nullable(false);
+            $table->string('price', 100)->nullable(false);
+            $table->string('duration', 100)->nullable(false);
         });
     }
 
@@ -23,6 +24,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('services');
+        Schema::dropIfExists('sponsorships');
     }
 };

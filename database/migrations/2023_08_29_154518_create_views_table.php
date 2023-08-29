@@ -11,14 +11,14 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('images', function (Blueprint $table) {
+        Schema::create('views', function (Blueprint $table) {
             $table->unsignedBigInteger('apartment_id');
             $table->foreign('apartment_id')
             ->references('id')
                 ->on('apartments')
                 ->onDelete('cascade');
-            $table->string('image_path')->nullable();
-            $table->boolean('is_cover')->nullable(false);
+            $table->string('ip', 20)->nullable(false);
+            $table->dateTime('date')->nullable(false);
         });
     }
 
@@ -27,6 +27,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('images');
+        Schema::dropIfExists('views');
     }
 };
