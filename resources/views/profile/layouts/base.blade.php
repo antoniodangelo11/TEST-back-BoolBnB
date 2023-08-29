@@ -14,12 +14,19 @@
         <!-- Scripts -->
         @vite(['resources/scss/app.scss', 'resources/js/app.js'])
     </head>
-    <body class="font-sans antialiased">
+<body>
 
-        @yield('header')
+    @include('admin.includes.header')
 
-        @yield('main')
+    <main>
+        <div class="container">
+            @yield('contents')
+        </div>
+    </main>
 
-        @yield('footer')
-    </body>
+    @include('admin.includes.footer')
+
+</body>
 </html>
+
+
