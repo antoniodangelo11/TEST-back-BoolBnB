@@ -13,33 +13,33 @@ class User extends Authenticatable
 {
     use HasApiTokens, HasFactory, Notifiable;
 
-   
-    protected $fillable = [
-        'name',
-        'lastname',
-        'email',
-        'birth_date',
-        'password',
-    ];
-
-    
-    protected $hidden = [
-        'password',
-        'remember_token',
-    ];
-
-    
-    protected $casts = [
-        'email_verified_at' => 'datetime',
-    ];
+    public $timestamps = false;
 
     public function apartments()
     {
         return $this->hasMany(Apartment::class);
     }
 
-    public function getFormattedBirthDateAttribute()
-    {
-        return $this->birth_date->format('d/m/Y'); // Formato: giorno/mese/anno
-    }
+    protected $fillable = [
+        'username',
+        'email',
+        'password',
+        'date_birth',
+    ];
+
+    /**
+     * The attributes that should be hidden for serialization.
+     */
+    protected $hidden = [
+        'password',
+        'remember_token',
+    ];
+
+    /**
+     * The attributes that should be cast.
+     */
+    protected $casts = [
+        'email_verified_at' => 'datetime',
+        'password' => 'hashed',
+    ];
 }
