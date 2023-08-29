@@ -26,8 +26,8 @@ class SponsorshipsTableSeeder extends Seeder
                 'duration' => '14 days'
             ],
             [
-                'level' => 'Deluxe', 
-                'price' => '150', 
+                'level'    => 'Deluxe', 
+                'price'    => '150', 
                 'duration' => '30 days'
             ],
         ];

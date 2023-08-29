@@ -2,8 +2,12 @@
 
 namespace Database\Seeders;
 
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
+use Carbon\Carbon;
+use App\Models\Apartment;
+use App\Models\Sponsorship;
 use Illuminate\Database\Seeder;
+use App\Models\ApartmentSponsorship;
+use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 
 class ApartmentSponsorshipTableSeeder extends Seeder
 {
@@ -12,24 +16,21 @@ class ApartmentSponsorshipTableSeeder extends Seeder
      */
     public function run()
     {
-        $faker = Faker::create();
 
-        $apartmentIds = DB::table('apartments')->pluck('id')->toArray();
-        $sponsorshipIds = DB::table('sponsorships')->pluck('id')->toArray();
+        $apartmentIds = Apartment::pluck('id')->toArray();
+        $sponsorshipIds = Sponsorship::pluck('id')->toArray();
 
         foreach ($apartmentIds as $apartmentId) {
-            // Randomly select a sponsorship for each apartment
-            $sponsorshipId = $faker->randomElement($sponsorshipIds);
+            $sponsorshipId = array_rand($sponsorshipIds);
 
-            // Generate random init and end dates
-            $initDate = $faker->dateTimeBetween('-30 days', 'now');
-            $endDate = $faker->dateTimeInInterval($initDate, '+30 days');
+            $initDate = Carbon::now()->subDays(rand(1, 30));
+            $endDate = Carbon::parse($initDate)->addDays(rand(1, 30));
 
-            DB::table('apartment_sponsorship')->insert([
-                'apartment_id' => $apartmentId,
+            ApartmentSponsorship::create([
+                'apartment_id'   => $apartmentId,
                 'sponsorship_id' => $sponsorshipId,
-                'init_date' => $initDate,
-                'end_date' => $endDate,
+                'init_date'      => $initDate,
+                'end_date'       => $endDate,
             ]);
         }
     }
