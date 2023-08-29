@@ -21,7 +21,7 @@ class ApartmentSponsorshipTableSeeder extends Seeder
         $sponsorshipIds = Sponsorship::pluck('id')->toArray();
 
         foreach ($apartmentIds as $apartmentId) {
-            $sponsorshipId = array_rand($sponsorshipIds);
+            $sponsorshipId = $sponsorshipIds[array_rand($sponsorshipIds)];
 
             $initDate = Carbon::now()->subDays(rand(1, 30));
             $endDate = Carbon::parse($initDate)->addDays(rand(1, 30));

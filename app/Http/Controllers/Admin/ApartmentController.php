@@ -2,9 +2,15 @@
 
 namespace App\Http\Controllers\Admin;
 
-use Illuminate\Support\Facades\Auth;
+use App\Models\View;
+use App\Models\Image;
+use App\Models\Address;
+use App\Models\Service;
+use App\Models\Apartment;
+use App\Models\Sponsorship;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
 
 class ApartmentController extends Controller
@@ -49,7 +55,7 @@ class ApartmentController extends Controller
         $images = Image::all();
         $addresses = Address::all();
         $views = View::all();
-        $sponsorships = Sponsorhip::all();
+        $sponsorships = Sponsorship::all();
         return view('Admin.apartments.create', compact('services', 'images', 'addresses', 'views', 'sponsorships'));
     }
 
@@ -130,11 +136,11 @@ class ApartmentController extends Controller
     public function edit($slug)
     {
         $apartment = Apartment::where('slug', $slug)->firstOrFail();
-        $utilities = Utility::all();
+        $services = Service::all();
         $images = Image::all();
         $addresses = Address::all();
         $views = View::all();
-        $sponsors = Sponsor::all();
+        $sponsorships = Sponsorship::all();
         return view('admin.apartments.edit', compact('apartment', 'utilities', 'images', 'addresses', 'views', 'sponsors'));
     }
 
@@ -163,7 +169,7 @@ class ApartmentController extends Controller
         $apartment->available        = $data['available'];
         $apartment->update();
 
-        $apartment->utilities()->sync($data['utilities'] ?? []);
+        $apartment->services()->sync($data['services'] ?? []);
         $apartment->sponsors()->sync($data['sponsors'] ?? []);
 
         return redirect()->route('admin.apartments.show', ['apartment' => $apartment]);

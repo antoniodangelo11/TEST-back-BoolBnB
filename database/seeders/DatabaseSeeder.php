@@ -13,13 +13,13 @@ class DatabaseSeeder extends Seeder
         $this->call([
             UsersTableSeeder::class,
             ApartmentsTableSeeder::class,
-            AddressesTableSeeder::class,
-            ImagesTableSeeder::class,
-            MessagesTableSeeder::class,
-            ViewsTableSeeder::class,
-            SponsorshipsTableSeeder::class,
             ServicesTableSeeder::class,
+            AddressesTableSeeder::class,
+            MessagesTableSeeder::class,
+            ImagesTableSeeder::class,
+            SponsorshipsTableSeeder::class,
             ApartmentSponsorshipTableSeeder::class,
+            ViewsTableSeeder::class,
         ]);
         
     }

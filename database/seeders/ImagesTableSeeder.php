@@ -15,7 +15,7 @@ class ImagesTableSeeder extends Seeder
     {
         $images = [
             [
-                'apartment_id' => 0,
+                'apartment_id' => 31,
                 'is_cover'     => false,
                 'image_path'   => [
                     'img_1.webp',

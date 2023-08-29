@@ -331,14 +331,27 @@ class ApartmentsTableSeeder extends Seeder
             ]);
         }
 
-        foreach (Apartment::all() as $apartment) {
-            $apartment->services()->attach(
-                Service::inRandomOrder()->take(rand(1, 3))->pluck('id')->toArray()
-            );
+        // foreach (Apartment::all() as $apartmentData) {
+        //     $apartmentData->services()->attach(
+        //         Service::inRandomOrder()->take(rand(1, 3))->pluck('id')->toArray()
+        //     );
 
-            $apartment->services()->sync($apartmentData['services']);
+        //     $apartmentData->services()->sync($apartmentData['services']);
+        // }
+
+        // $apartment->sponsorships()->sync($apartmentData['sponsorships']);
+
+        foreach ($apartmentsData as $apartmentData) {
+            $apartmentData = Apartment::create($apartmentData);
         }
 
-        $apartment->sponsorships()->sync($apartmentData['sponsorships']);
+        foreach (Apartment::all() as $apartmentFromDb) {
+            $randomServices = Service::inRandomOrder()->take(rand(1, 3))->pluck('id')->toArray();
+            $apartmentFromDb->services()->attach($randomServices);
+        }
     }
 };
+
+
+
+
