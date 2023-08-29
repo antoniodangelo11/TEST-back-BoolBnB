@@ -1,29 +1,30 @@
 <?php
 
+use App\Http\Controllers\Admin\ApartmentController;
+use App\Http\Controllers\Admin\PageController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\Admin\UserController;
-use App\Http\Controllers\Admin\ApartmentController;
-use App\Http\Controllers\Admin\PageController as AdminPageController;
-use App\Http\Controllers\Guest\PageController as GuestPageController;
 
-Route::get('/', [GuestPageController::class, 'home'])->name('guest.home');
-Route::get('/dashboard', [AdminPageController::class, 'dashboard'])->name('dashboard');
+/*
+|--------------------------------------------------------------------------
+| Web Routes
+|--------------------------------------------------------------------------
+|
+| Here is where you can register web routes for your application. These
+| routes are loaded by the RouteServiceProvider and all of them will
+| be assigned to the "web" middleware group. Make something great!
+|
+*/
 
-Route::middleware('auth', 'verified')
+Route::get('/', [PageController::class, 'home'])->name('guests.home');
+
+Route::middleware(['auth', 'verified'])
     ->name('admin.')
     ->prefix('admin')
     ->group(function () {
-        
-
-    Route::get('/apartment/trashed', [ApartmentController::class, 'trashed'])->name('apartments.trashed');
-    Route::post('/apartment/{apartment}/restore', [ApartmentController::class, 'restore'])->name('apartments.restore');
-    Route::delete('/apartment/{apartment}/harddelete', [ApartmentController::class, 'harddelete'])->name('apartments.harddelete');
-    route::post('/apartment/{apartment}/cancel', [ApartmentController::class, 'cancel'])->name('apartments.cancel');
-
-    Route::resource('apartments', ApartmentController::class);
-    Route::resource('users', UserController::class);
-});
+        Route::get('/', [PageController::class, 'dashboard'])->name('dashboard');
+        Route::resource('apartment', ApartmentController::class);
+    });
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
@@ -31,4 +32,5 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
-require __DIR__.'/auth.php';
+require __DIR__ . '/auth.php';
+
