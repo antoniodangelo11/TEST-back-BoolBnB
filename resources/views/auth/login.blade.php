@@ -1,4 +1,4 @@
-@extends('auth.layouts.base')
+@extends('guests.layouts.base')
 
 @section('contents')
     @if (session('error'))
