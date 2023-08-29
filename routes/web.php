@@ -1,9 +1,9 @@
 <?php
 
-use App\Http\Controllers\Admin\ApartmentController;
-use App\Http\Controllers\Admin\PageController;
-use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\Admin\PageController;
+use App\Http\Controllers\Admin\ApartmentController;
 
 /*
 |--------------------------------------------------------------------------
