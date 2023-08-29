@@ -317,8 +317,6 @@ class ApartmentsTableSeeder extends Seeder
         ];
 
         foreach ($apartmentsData as $apartmentData) {
-
-            $available = isset($apartmentData['available']) ? (bool)$apartmentData['available'] : false;
             
             $apartment = Apartment::create([
                 'name'          => $apartmentData['name'],
@@ -326,8 +324,8 @@ class ApartmentsTableSeeder extends Seeder
                 'beds'          => $apartmentData['beds'],
                 'bathrooms'     => $apartmentData['bathrooms'],
                 'square_meters' => $apartmentData['square_meters'],
-                'is_available'  => $available,
-                'is_sponsored'  => true,
+                'is_available'  => $apartmentData['is_available'],
+                'is_sponsored'  => $apartmentData['is_sponsored'],
                 'user_id'       => $apartmentData['user_id'],
             ]);
 

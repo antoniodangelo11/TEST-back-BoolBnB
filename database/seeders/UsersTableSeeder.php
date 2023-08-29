@@ -23,7 +23,7 @@ class UsersTableSeeder extends Seeder
                 "image"       => "",
             ],
             // [
-            //     "name"        => "Luca",
+            //     "name"        => "Stefano",
             //     "lastname"    => "Casamassima",
             //     "email"       => "casamassimaluca723@gmail.com",
             //     'birth_date'  => Carbon::createFromFormat('d/m/Y', '10/11/1994')->format('Y-m-d'),

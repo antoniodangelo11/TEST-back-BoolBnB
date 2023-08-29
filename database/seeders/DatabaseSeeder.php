@@ -19,6 +19,7 @@ class DatabaseSeeder extends Seeder
             ViewsTableSeeder::class,
             SponsorshipsTableSeeder::class,
             ServicesTableSeeder::class,
+            ApartmentSponsorshipTableSeeder::class,
         ]);
         
     }
