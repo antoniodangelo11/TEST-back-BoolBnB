@@ -2,8 +2,9 @@
 
 namespace Database\Seeders;
 
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
+use App\Models\Image;
 use Illuminate\Database\Seeder;
+use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 
 class ImagesTableSeeder extends Seeder
 {
@@ -346,21 +347,17 @@ class ImagesTableSeeder extends Seeder
         ];
 
 
-        foreach ($apartmentIds as $apartmentId) {
-            // Generate a random number of images per apartment
-            $numImages = $faker->numberBetween(1, 5);
+        foreach ($images as $imageData) {
+            $apartment_id = $imageData['apartment_id'];
+            $is_cover = $imageData['is_cover'];
 
-            for ($i = 0; $i < $numImages; $i++) {
-                $imageWidth = $faker->numberBetween(800, 1200);
-                $imageHeight = $faker->numberBetween(600, 900);
-                $imagePath = "https://picsum.photos/{$imageWidth}/{$imageHeight}";
-
-                DB::table('images')->insert([
-                    'apartment_id' => $apartmentId,
-                    'image_path' => $imagePath,
-                    'is_cover' => ($i === 0), // Set the first image as the cover
+            foreach ($imageData['image_path'] as $path) {
+                Image::create([
+                    'apartment_id' => $apartment_id,
+                    'is_cover'     => $is_cover,
+                    'image_path'   => $path,
                 ]);
             }
         }
     }
-}
+};
